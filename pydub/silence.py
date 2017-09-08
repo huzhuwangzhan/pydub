@@ -89,7 +89,7 @@ def detect_nonsilent(audio_segment, min_silence_len=1000, silence_thresh=-16, se
 
 
 def split_on_silence(audio_segment, min_silence_len=1000, silence_thresh=-16, keep_silence=100,
-                     seek_step=1):
+                     seek_step=1,timestamp = True):
     """
     audio_segment - original pydub.AudioSegment() object
 
@@ -113,4 +113,8 @@ def split_on_silence(audio_segment, min_silence_len=1000, silence_thresh=-16, ke
 
         chunks.append(audio_segment[start_i:end_i])
 
-    return chunks
+    if timestamp:
+
+        return chunks, not_silence_ranges
+    else:
+        return chunks
